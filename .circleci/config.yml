@@ -58,7 +58,7 @@ jobs:
             fi
       - run:
           name: Publish
-          command: npm publish
+          command: npm publish --access public
       - run:
           name: Git Push
           command: git push origin ${CIRCLE_BRANCH}
