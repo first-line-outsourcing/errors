@@ -52,16 +52,18 @@ jobs:
 
             MINOR="Merge pull request.+minor"
             if [[ "${GIT_COMMIT_DESC}" =~ $MINOR ]]; then
-              npm version minor -m "Bumped to version %s [ci skip]"
+              npm version minor -m "chore: version %s [ci skip]"
             else
-              npm version patch -m "Bumped to version %s [ci skip]"
+              npm version patch -m "chore: version %s [ci skip]"
             fi
       - run:
           name: Publish
           command: npm publish --access public
       - run:
           name: Git Push
-          command: git push origin ${CIRCLE_BRANCH}
+          command: |
+            git push origin ${CIRCLE_BRANCH}
+            git push origin --tags
 
 workflows:
   version: 2
