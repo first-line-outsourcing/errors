@@ -2,6 +2,7 @@
   "name": "@floteam/errors",
   "version": "0.0.0",
   "description": "Classes for working with errors",
+  "private": false,
   "scripts": {
     "build": "shx rm -rf dist && tsc",
     "test:watch": "jest --watchAll --colors --passWithNoTests",
