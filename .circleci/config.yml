@@ -36,8 +36,8 @@ jobs:
       - run:
           name: Set up git user
           command: |
-            git config user.email "zaikin.andry@gmail.com"
-            git config user.name "zaikin-andrew"
+            git config user.email "azhivaeva@flo.team"
+            git config user.name "azhivaeva-flo"
       - run:
           name: Run tests
           command: npm run test:ci
