@@ -53,7 +53,9 @@ jobs:
             else
               "$(npm version patch -m "chore: version %s [ci skip]")
             fi
-
+      - run:
+          name: Publish
+          command: |
             VERSION=$(cat package.json \
               | grep version \
               | head -1 \
