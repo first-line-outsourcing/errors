@@ -8,13 +8,16 @@
     "test:watch": "jest --watchAll --colors --passWithNoTests",
     "test": "jest --colors --passWithNoTests",
     "test:ci": "jest --no-colors --passWithNoTests",
-    "prepare": "husky install"
+    "postinstall": "husky install",
+    "pre-publish": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && cd dist && npm pack",
+    "preversion": "package-check --cwd dist"
   },
-  "main": "./dist/errors/index.js",
-  "types": "./dist/errors/index.d.ts",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "type": "commonjs",
+  "module": "./wrapper.js",
   "files": [
-    "dist/**/*"
+    "/**/*"
   ],
   "keywords": [
     "errors"
@@ -25,6 +28,7 @@
     "type": "git",
     "url": "https://github.com/first-line-outsourcing/errors.git"
   },
+  "sideEffects": false,
   "dependencies": {
     "@redtea/format-axios-error": "^2.0.2",
     "@types/node": "^14.17.1",
@@ -33,6 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@skypack/package-check": "^0.2.2",
     "@types/jest": "26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
@@ -53,10 +58,10 @@
   "lint-staged": {
     "*": "prettier --write . --ignore-unknown"
   },
-  "##": "for_future_update_of_ts_to_4.3",
   "exports": {
-    ".": "./dist/errors/index.js",
-    "./*": "./dist/errors/*.js",
-    "./dist/errors/*": "./dist/errors/*.js"
+    ".": {
+      "import": "./index.js",
+      "require": "./wrapper.js"
+    }
   }
 }

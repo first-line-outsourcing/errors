@@ -42,23 +42,26 @@ jobs:
           name: Run tests
           command: npm run test:ci
       - run:
-          name: Build
-          command: npm run build
-      - run:
-          name: Bump version
+          name: Bump version and Publish
           command: |
             GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"
             echo "${GIT_COMMIT_DESC}"
 
             MINOR="Merge pull request.+minor"
             if [[ "${GIT_COMMIT_DESC}" =~ $MINOR ]]; then
-              npm version minor -m "chore: version %s [ci skip]"
+              "$(npm version minor -m "chore: version %s [ci skip]")
             else
-              npm version patch -m "chore: version %s [ci skip]"
+              "$(npm version patch -m "chore: version %s [ci skip]")
             fi
-      - run:
-          name: Publish
-          command: npm publish --access public
+
+            VERSION=$(cat package.json \
+              | grep version \
+              | head -1 \
+              | awk -F: '{ print $2 }' \
+              | sed 's/[",]//g' \
+              | tr -d '[[:space:]]')
+
+            npm publish "./dist/floteam-errors-${VERSION}.tgz" --access public
       - run:
           name: Git Push
           command: |
