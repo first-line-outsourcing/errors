@@ -76,3 +76,4 @@ workflows:
             branches:
               only:
                 - master
+          context: NPM_TOKEN
