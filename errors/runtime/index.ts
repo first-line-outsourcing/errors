@@ -1,4 +1,5 @@
 export { InputValidationError } from './input-validation-error';
+export { AlreadyExistsError } from './already-exists-error';
 
 /**
  * Example of usage:
