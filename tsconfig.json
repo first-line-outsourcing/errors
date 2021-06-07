@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom", "esnext.asynciterable"]
+  },
+  "include": ["errors/**/*"]
+}

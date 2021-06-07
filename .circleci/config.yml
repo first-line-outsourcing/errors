@@ -1,0 +1,78 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-v1-{{ checksum "package.json" }}
+      - run:
+          name: NPM install
+          command: npm install
+      - run:
+          name: Check build
+          command: npm run build
+      - run:
+          name: Run tests
+          command: npm run test:ci
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-v1-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+  publish:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Add token to .npmrc
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - run:
+          name: NPM install
+          command: npm install
+      - run:
+          name: Set up git user
+          command: |
+            git config user.email "zaikin.andry@gmail.com"
+            git config user.name "zaikin-andrew"
+      - run:
+          name: Run tests
+          command: npm run test:ci
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Bump version
+          command: |
+            GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"
+            echo "${GIT_COMMIT_DESC}"
+
+            MINOR="Merge pull request.+minor"
+            if [[ "${GIT_COMMIT_DESC}" =~ $MINOR ]]; then
+              npm version minor -m "Bumped to version %s [ci skip]"
+            else
+              npm version patch -m "Bumped to version %s [ci skip]"
+            fi
+      - run:
+          name: Publish
+          command: npm publish
+      - run:
+          name: Git Push
+          command: git push origin ${CIRCLE_BRANCH}
+
+workflows:
+  version: 2
+  build_and_publish:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /^master$/
+      - publish:
+          filters:
+            branches:
+              only:
+                - master
