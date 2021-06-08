@@ -9,7 +9,7 @@
     "test": "jest --colors --passWithNoTests",
     "test:ci": "jest --no-colors --passWithNoTests",
     "postinstall": "husky install",
-    "pre-publish": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
+    "prepublish": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
     "preversion": "package-check --cwd dist"
   },
   "main": "./index.js",
