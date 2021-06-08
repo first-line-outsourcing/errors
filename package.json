@@ -4,12 +4,13 @@
   "description": "Classes for working with errors",
   "private": false,
   "scripts": {
+    "build": "shx rm -rf dist && tsc",
     "test:watch": "jest --watchAll --colors --passWithNoTests",
     "test": "jest --colors --passWithNoTests",
     "test:ci": "jest --no-colors --passWithNoTests",
     "postinstall": "husky install",
-    "build": "shx rm -rf dist && tsc && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
-    "preversion": "package-check --cwd dist"
+    "build-and-pack": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
+    "postpack": "package-check --cwd dist"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
