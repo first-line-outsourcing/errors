@@ -10,7 +10,7 @@
     "test:ci": "jest --no-colors --passWithNoTests",
     "postinstall": "husky install",
     "build-and-pack": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
-    "postpack": "package-check --cwd dist"
+    "postpack": "package-check"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
