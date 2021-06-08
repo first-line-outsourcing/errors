@@ -42,7 +42,7 @@ jobs:
           name: Run tests
           command: npm run test:ci
       - run:
-          name: Bump version and Publish
+          name: Bump version
           command: |
             GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"
             echo "${GIT_COMMIT_DESC}"
@@ -53,6 +53,9 @@ jobs:
             else
               "$(npm version patch -m "chore: version %s [ci skip]")
             fi
+      - run:
+          name: Prepublish
+          command: npm run prepublishOnly
       - run:
           name: Publish
           command: |
