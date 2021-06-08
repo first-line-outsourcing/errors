@@ -9,13 +9,13 @@
     "test": "jest --colors --passWithNoTests",
     "test:ci": "jest --no-colors --passWithNoTests",
     "postinstall": "husky install",
-    "pre-publish": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && cd dist && npm pack",
+    "pre-publish": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
     "preversion": "package-check --cwd dist"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
   "type": "commonjs",
-  "module": "./wrapper.js",
+  "module": "./index.mjs",
   "files": [
     "/**/*"
   ],
@@ -60,8 +60,8 @@
   },
   "exports": {
     ".": {
-      "import": "./index.js",
-      "require": "./wrapper.js"
+      "import": "./index.mjs",
+      "require": "./index.js"
     }
   }
 }
