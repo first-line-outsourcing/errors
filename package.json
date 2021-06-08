@@ -8,7 +8,7 @@
     "test:watch": "jest --watchAll --colors --passWithNoTests",
     "test": "jest --colors --passWithNoTests",
     "test:ci": "jest --no-colors --passWithNoTests",
-    "prepare": "husky install",
+    "prepare-husky": "husky install",
     "build-and-pack": "npm run build && shx cp package.json dist/ && shx cp README.md dist/ && shx cp mjs-wrapper/index.mjs dist/ && cd dist && npm pack",
     "postpack": "package-check"
   },
