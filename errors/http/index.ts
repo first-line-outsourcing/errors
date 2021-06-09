@@ -9,6 +9,7 @@ export { HttpServiceUnavailableError } from './http-service-unavailable-error';
 export { HttpTooManyRequestsError } from './http-too-many-requests-error';
 export { HttpUnauthorizedError } from './http-unauthorized-error';
 export { HttpUnprocessableEntityError } from './http-unprocessable-entity-error';
+export { HttpError, ErrorStatusCode } from './http-error';
 
 /**
  * Example of usage:

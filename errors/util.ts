@@ -1,7 +1,5 @@
-import { HttpBadRequestError, HttpInternalServerError } from './http';
-import { ErrorStatusCode, HttpError } from './http/http-error';
-import { InputValidationError } from './runtime';
-import { RuntimeError } from './runtime/runtime-error';
+import { HttpBadRequestError, HttpInternalServerError, HttpError, ErrorStatusCode } from './http';
+import { InputValidationError, RuntimeError } from './runtime';
 import { format } from '@redtea/format-axios-error';
 import { AxiosError } from 'axios';
 
