@@ -17,7 +17,7 @@
   "type": "commonjs",
   "module": "./index.mjs",
   "files": [
-    "/**/*"
+    "**/*"
   ],
   "keywords": [
     "errors"
@@ -63,6 +63,6 @@
       "import": "./index.mjs",
       "require": "./index.js"
     },
-    "./*": "./**/*.js"
+    "./*": "./*.js"
   }
 }
