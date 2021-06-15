@@ -1,6 +1,6 @@
 {
   "name": "@floteam/errors",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Classes for working with errors",
   "private": false,
   "scripts": {
