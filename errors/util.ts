@@ -13,10 +13,10 @@ export function convertToHttpError(error: Error | AxiosError | RuntimeError): Ht
   const axiosError = (<AxiosError>error).isAxiosError && format(<AxiosError>error);
 
   if (error instanceof InputValidationError) {
-    return new HttpBadRequestError(error.message, { text: 'Instance InputValidationError' });
+    return new HttpBadRequestError(error.message, error.details);
   }
   if (error instanceof RuntimeError) {
-    return new HttpInternalServerError(error.message, { text: 'Instance RuntimeError' });
+    return new HttpInternalServerError(error.message, error.details);
   }
 
   if (axiosError) {
@@ -27,5 +27,5 @@ export function convertToHttpError(error: Error | AxiosError | RuntimeError): Ht
     );
   }
 
-  return new HttpInternalServerError(error.message, { text: 'Unknown error' });
+  return new HttpInternalServerError(error.message);
 }
