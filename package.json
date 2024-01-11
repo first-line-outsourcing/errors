@@ -1,5 +1,5 @@
 {
-  "name": "@floteam/errors",
+  "name": "@flopackages/errors",
   "version": "1.0.9",
   "description": "Classes for working with errors",
   "private": false,
